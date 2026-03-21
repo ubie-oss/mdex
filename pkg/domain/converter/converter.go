@@ -135,6 +135,8 @@ func convertImage(n *ast.Image, source []byte, mdFilePath string, imageBaseDir s
 	var baseDir string
 	if imageBaseDir != "" && strings.HasPrefix(dest, "/") {
 		// Absolute path with imageBaseDir: resolve relative to imageBaseDir
+		// Strip leading slash to treat as relative to imageBaseDir
+		dest = strings.TrimPrefix(dest, "/")
 		baseDir = filepath.Clean(imageBaseDir)
 		localPath = filepath.Join(imageBaseDir, dest)
 	} else {
